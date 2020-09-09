@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<br>
+<div class="text-center">
+    {% for book in books %}
+        <span>书名： {{ book }} <br/></span>
+    {% endfor %}
+</div>
+
+{# 实现分页标签的代码 #}
+{# 这里使用 bootstrap 渲染页面 #}
+<div id="pages" class="text-center">
+    <nav>
+        <ul class="pagination">
+            <li class="step-links">
+                {% if books.has_previous %}
+                    <a class='active' href="?page={{ books.previous_page_number }}">上一页</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ books.number }} of {{ books.paginator.num_pages }}</span>
+
+                {% if books.has_next %}
+                    <a class='active' href="?page={{ books.next_page_number }}">下一页</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{#<form action="{% url 'sta:page' %}" method="post">#}
+{#    <table>#}
+{#        <tr>#}
+{#            <td>用户名</td>#}
+{#            <td>密码</td>#}
+{#        </tr>#}
+{#        {% for user in pager.object_list %}#}
+{#            <tr>#}
+{#                <td>{{ user.name }}</td>#}
+{#                <td>{{ user.age }}</td>#}
+{#                <td>{{ user.gender }}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{##}
+{#    </table>#}
+{#    <div>#}
+{#        {% for page in paginagtor.page_range %}#}
+{#            {{ page }}#}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{#</form>#}
+</body>
+</html>

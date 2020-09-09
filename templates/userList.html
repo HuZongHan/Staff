@@ -1,0 +1,118 @@
+﻿{% load static %}
+<html>
+<head>
+    <title>emplist</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    2020/9/10
+                    <br/>
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Revolution</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                员工管理系统
+            </h1>
+            <table class="table">
+                {#						<tr class="table_header">#}
+                <td>
+                    ID
+                </td>
+                <td>
+
+                    姓名
+
+                </td>
+                <td>
+                    性别
+                </td>
+                <td>
+                    年龄
+                </td>
+                <td>
+                    操作
+
+                </td>
+                {#						</tr>#}
+                {#                {% for emp in emp_list %}#}
+                {% for emp in page_single.object_list %}
+
+
+                    <tr class="row1">
+                        <td>
+                            {{ emp.id }}
+                        </td>
+                        <td>
+                            {{ emp.name }}
+                        </td>
+                        <td>
+                            {% if  emp.gender %}
+                                男
+                            {% else %}
+                                女
+                            {% endif %}
+
+                        </td>
+                        <td>
+                            {{ emp.age }}
+                        </td>
+
+                        <td>
+                            <a href="{% url 'sta:userDelete' %}?id={{ emp.id }}">删除</a>
+                            <a href='{% url "sta:userUpdate" %}?id={{ emp.id }}'>修改</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+            <p>
+                <a href="{% url 'sta:userAdd' %}">添加员工</a>
+
+            </p>
+            <div>
+
+                    {% if page_single.has_previous %}
+                        <a class='active' href="?page={{ page_single.previous_page_number }}">上一页</a>
+                    {% endif %}
+                    {% for foo in paginator.page_range %}
+                        <a href="{% url 'sta:userList' %}?page={{ foo }}">{{ foo }}</a>
+                    {% endfor %}
+                    {% if page_single.has_next %}
+                        <a class="active" href="?page={{ page_single.next_page_number }}">下一页</a>
+                    {% endif %}
+
+                {#                <div>#}
+                {#                    {% if page_single.has_previous %}#}
+                {#                        <a href="{% url 'sta:userList' %}{{ page_single.previous_page_number }}">上一页</a>#}
+                {#                    {% endif %}#}
+                {#                </div>#}
+
+
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer_bg">
+            1602460860@qq.com(京)-经营性-2017-0020京公网安备11000002000001号
+        </div>
+    </div>
+</div>
+</body>
+</html>
